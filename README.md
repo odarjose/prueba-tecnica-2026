@@ -1,77 +1,98 @@
-# Prueba Técnica
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-Hola, gracias por llegar a esta etapa del proceso.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-A continuación te dejamos la prueba técnica. La idea no es que sea perfecta ni que inviertas un fin de semana entero en ella, sino ver cómo estructuras una solución y cómo razonas tus decisiones.
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-**Cómo entregarla:**
+## Description
 
-Haz un **fork** de este repositorio y trabaja sobre él. Cuando termines, envía un  **Pull Request** . Ten en cuenta que los commits que hagas después del PR no se tomarán en cuenta, así que asegúrate de que esté todo listo antes de abrirlo.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-Tienes **72 horas** desde que te compartimos el repositorio para entregar.
+## Project setup
 
-Después de revisar tu código, coordinamos una **videollamada corta** donde te pediremos que nos cuentes cómo lo resolviste y que hagas un par de ajustes en vivo. Nada complicado, solo queremos verte trabajar un rato.
+```bash
+$ pnpm install
+```
 
-Cualquier duda, escríbeme a elias.guere@unifrutti.com
+## Compile and run the project
 
----
+```bash
+# development
+$ pnpm run start
 
-## Lo que vas a construir
+# watch mode
+$ pnpm run start:dev
 
-Una **API RESTful** para administrar un catálogo de productos.
+# production mode
+$ pnpm run start:prod
+```
 
-Puedes elegir **una** de estas dos opciones según con qué te sientas más cómodo:
+## Run tests
 
-| Opción | Backend             | Base de datos           |
-| ------- | ------------------- | ----------------------- |
-| A       | ASP.NET Core (C#)   | SQL Server o PostgreSQL |
-| B       | NestJS (TypeScript) | SQL Server o PostgreSQL |
+```bash
+# unit tests
+$ pnpm run test
 
----
+# e2e tests
+$ pnpm run test:e2e
 
-## Autenticación
+# test coverage
+$ pnpm run test:cov
+```
 
-| Acción           | Descripción                                   |
-| ----------------- | ---------------------------------------------- |
-| Registrar usuario | Registrar nombre de usuario y contraseña      |
-| Iniciar sesión   | Autenticar al usuario y devolver un token JWT  |
-| Cerrar sesión    | Invalidar el token del usuario                 |
-| Refrescar token   | Generar un nuevo token e invalidar el anterior |
+## Deployment
 
-El token debería durar entre  **5 y 10 minutos** .
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
----
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-## Productos
+```bash
+$ pnpm install -g @nestjs/mau
+$ mau deploy
+```
 
-Los endpoints de esta sección requieren estar autenticado (token JWT válido).
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-| Acción                | Descripción                                                                                                                                                               |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Registrar producto     | Nombre, descripción, precio unitario, stock y categoría                                                                                                                  |
-| Listar productos       | Listar los productos, con filtros opcionales:`sort`,`limit`,`page`,`search_by_name` *(ej:`sort=nombre-ASC`,`limit=10`,`page=2`,`search_by_name=laptop`)* |
-| Buscar producto por ID | Devolver el detalle de un producto                                                                                                                                         |
-| Actualizar producto    | Modificar un producto existente                                                                                                                                            |
-| Eliminar producto      | Eliminar un producto                                                                                                                                                       |
+## Resources
 
----
+Check out a few resources that may come in handy when working with NestJS:
 
-## Un endpoint extra (opcional)
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-Si te sobra tiempo y quieres, agrega un endpoint adicional que te parezca útil para esta API. Tú eliges cuál. Si lo haces, cuéntanos en el README por qué lo elegiste.
+## Support
 
----
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Algunas consideraciones
+## Stay in touch
 
-* Incluye el **script SQL** con las tablas y relaciones de la base de datos.
-* Agrega un **`README.md`** explicando cómo levantar el proyecto en local. Si no podemos correrlo siguiendo tus instrucciones, no vamos a poder evaluarlo bien, así que dale cariño a esta parte.
-* La API debería validar los datos de entrada y devolver mensajes de error claros cuando algo sale mal.
-* No necesitas hacer frontend.
-* Usa ORM o queries directas, lo que prefieras (Entity Framework, TypeORM, Dapper, etc.).
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
----
+## License
 
-Una última cosa: cuando abras el Pull Request, escríbenos en la descripción **cuál fue la parte que más te costó** de la prueba y cómo la resolviste. Nos sirve para conversarlo en la videollamada.
-
-¡Éxitos! Quedamos atentos a tu entrega.
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
