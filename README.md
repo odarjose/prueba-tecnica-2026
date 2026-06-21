@@ -1,98 +1,236 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# API RESTful de Catálogo de Productos
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API construida con NestJS, TypeScript, PostgreSQL y TypeORM para administrar un catálogo de productos con autenticación JWT.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Requisitos
 
-## Description
+- Node.js 20 o superior
+- pnpm
+- Docker y Docker Compose
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Configuración
 
-## Project setup
+Instalar dependencias:
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
-## Compile and run the project
+Crear el archivo `.env` desde el ejemplo:
 
 ```bash
-# development
-$ pnpm run start
+# Linux / macOS / Git Bash
+cp .env.example .env
 
-# watch mode
-$ pnpm run start:dev
+# Windows (cmd)
+copy .env.example .env
 
-# production mode
-$ pnpm run start:prod
+# Windows (PowerShell)
+Copy-Item .env.example .env
 ```
 
-## Run tests
+Valores usados por defecto:
+
+```env
+PORT=3000
+
+DB_HOST=127.0.0.1
+DB_PORT=5433
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_NAME=catalogo_productos
+
+JWT_ACCESS_SECRET=change-me-access-secret
+JWT_ACCESS_EXPIRES_IN=10m
+
+JWT_REFRESH_SECRET=change-me-refresh-secret
+JWT_REFRESH_EXPIRES_IN=7d
+```
+
+## Base de Datos
+
+Levantar PostgreSQL con Docker:
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+docker compose up -d
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Aplicar el script SQL:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+docker exec -i catalogo_productos_db psql -U postgres -d catalogo_productos < scripts/schema.sql
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+> **PowerShell:** usa esta variante:
+> ```powershell
+> Get-Content scripts/schema.sql | docker exec -i catalogo_productos_db psql -U postgres -d catalogo_productos
+> ```
 
-## Resources
+## Ejecutar la API
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+pnpm run start:dev
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+La API queda disponible en:
 
-## Support
+```txt
+http://localhost:3000
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Autenticación
 
-## Stay in touch
+> **Windows (cmd):** Reemplaza las comillas simples `'...'` por comillas dobles escapadas `\"...\"`.
+> **PowerShell:** Las comillas simples `'...'` funcionan directamente en los ejemplos.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Registrar usuario:
 
-## License
+```bash
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"password123"}'
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Iniciar sesión:
+
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"password123"}'
+```
+
+Respuesta esperada:
+
+```json
+{
+  "accessToken": "...",
+  "refreshToken": "...",
+  "expiresIn": "10m",
+  "user": {
+    "id": "...",
+    "username": "admin",
+    "createdAt": "..."
+  }
+}
+```
+
+Refrescar token:
+
+```bash
+curl -X POST http://localhost:3000/auth/refresh \
+  -H "Content-Type: application/json" \
+  -d '{"refreshToken":"REFRESH_TOKEN"}'
+```
+
+Cerrar sesión:
+
+```bash
+curl -X POST http://localhost:3000/auth/logout \
+  -H "Authorization: Bearer ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"refreshToken":"REFRESH_TOKEN"}'
+```
+
+## Productos
+
+Todos los endpoints de productos requieren:
+
+```txt
+Authorization: Bearer ACCESS_TOKEN
+```
+
+Crear producto:
+
+```bash
+curl -X POST http://localhost:3000/products \
+  -H "Authorization: Bearer ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Laptop",
+    "description": "Laptop para oficina",
+    "unitPrice": 1200.50,
+    "stock": 8,
+    "category": "Tecnología"
+  }'
+```
+
+Listar productos:
+
+```bash
+curl "http://localhost:3000/products?sort=name-ASC&limit=10&page=1&search_by_name=lap" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+Buscar por ID:
+
+```bash
+curl http://localhost:3000/products/PRODUCT_ID \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+Actualizar producto:
+
+```bash
+curl -X PATCH http://localhost:3000/products/PRODUCT_ID \
+  -H "Authorization: Bearer ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"stock":15}'
+```
+
+Eliminar producto:
+
+```bash
+curl -X DELETE http://localhost:3000/products/PRODUCT_ID \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+## Endpoint Extra
+
+Se agregó:
+
+```txt
+GET /products/low-stock?threshold=10
+```
+
+Este endpoint devuelve productos cuyo stock es menor o igual al umbral indicado. Lo elegí porque es útil para un catálogo real: permite detectar productos que necesitan reposición.
+
+Ejemplo:
+
+```bash
+curl "http://localhost:3000/products/low-stock?threshold=10" \
+  -H "Authorization: Bearer ACCESS_TOKEN"
+```
+
+## Validaciones
+
+La API valida los datos de entrada con DTOs y rechaza campos no permitidos.
+
+Ejemplos:
+
+- `username`: mínimo 3 caracteres.
+- `password`: mínimo 8 caracteres.
+- `unitPrice`: mayor a 0 y máximo 2 decimales.
+- `stock`: entero mayor o igual a 0.
+- `sort`: solo acepta `name`, `unit_price`, `stock`, `category` o `created_at` con `ASC` o `DESC`.
+
+## Verificación
+
+Compilar:
+
+```bash
+pnpm run build
+```
+
+Lint:
+
+```bash
+pnpm exec eslint "{src,apps,libs,test}/**/*.ts"
+```
+
+Tests:
+
+```bash
+pnpm run test
+```
+
+
